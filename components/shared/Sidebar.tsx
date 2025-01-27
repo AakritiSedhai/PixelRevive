@@ -5,7 +5,6 @@ import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from '../ui/button'
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -31,8 +30,8 @@ const Sidebar = () => {
                       <Image 
                         src={link.icon}
                         alt="logo"
-                        width={20} // Reduced icon size
-                        height={20} // Reduced icon size
+                        width={15} // Reduced icon size
+                        height={15} // Reduced icon size
                         className={`${isActive && 'brightness-200'}`}
                       />
                       <span className="text-sm">{link.label}</span> {/* Reduced font size */}
@@ -54,8 +53,8 @@ const Sidebar = () => {
                       <Image 
                         src={link.icon}
                         alt="logo"
-                        width={20} // Reduced icon size
-                        height={20} // Reduced icon size
+                        width={15} // Reduced icon size
+                        height={15} // Reduced icon size
                         className={`${isActive && 'brightness-200'}`}
                       />
                       <span className="text-sm">{link.label}</span> {/* Reduced font size */}
@@ -71,9 +70,21 @@ const Sidebar = () => {
           </SignedIn>
 
           <SignedOut>
-            <Button asChild className="button bg-purple-gradient bg-cover text-sm"> {/* Reduced font size */}
-              <Link href="/sign-in">Login</Link>
-            </Button>
+            <ul className="sidebar-nav_elements">
+              {navLinks.map((link) => (
+                <li key={link.route} className="sidebar-nav_element group text-gray-700">
+                  <Link className="sidebar-link" href="/sign-in">
+                    <Image 
+                      src={link.icon}
+                      alt="logo"
+                      width={15} // Reduced icon size
+                      height={15} // Reduced icon size
+                    />
+                    <span className="text-sm">{link.label}</span> {/* Reduced font size */}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </SignedOut>
         </nav>
       </div>
